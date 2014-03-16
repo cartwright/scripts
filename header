@@ -1,0 +1,153 @@
+#!/bin/bash
+#
+# Author: Jeremy Cartwright
+# Created: 28-Mar-2012
+# Edited: 10-Mar-14
+# header: prints a header for a new bash file,
+# 	  or a .c file if passed the -c flag,
+#         or a .go file (with dir structure and app.yaml)
+#         if passed the -go flag,
+#	  or a .py file if passed the -py flag.
+
+app=$1
+lang=$2
+home="/home/$USER/"
+c=".c"
+go=".go"
+py=".py"
+ubin="ubin/"
+nest="nest/"
+scripts="scripts/"
+godir="go/$app/"
+copyright='/* Copyright (c) 2012-2014 Jeremy Cartwright. All rights reserved.
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions
+   are met:
+ 
+   * Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in the
+     documentation and/or other materials provided with the distribution.
+   * Neither the name of Jeremy Cartwright nor the names of its
+     contributors may be used to endorse or promote products derived
+     from this software without specific prior written permission.
+
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+   A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+   OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+   LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+   DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+   THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/'
+
+edit() {
+	cat $t
+	echo -n "Would you like to edit $app? (Y/n): "
+	read m
+
+	if [ $m == "Y" ]; then
+	   vim $t
+	   exit 0
+	else
+	   echo "suits. Catch you on the flipside."
+	   exit 1
+	fi
+}
+
+if [ $# -eq 1 ]; then
+	t=$home$scripts$app
+	touch $t
+	echo "#!/bin/bash" > $t
+	echo "#" >> $t
+	echo "#  Author: Jeremy Cartwright" >> $t
+	echo "# Contact: jeremy@tcjc8.com" >> $t
+	echo "# Created:" `date` >> $t
+	echo "# $app: " >> $t
+	mkexe $t
+	edit
+elif [ $lang == "-c" ]; then
+	t=$home$ubin$app$c
+	touch $t
+	echo "$copyright" > $t
+	echo "/* Includes & Defines*/" >> $t
+	echo >> $t
+	echo >> $t
+	echo >> $t
+	echo "/*" >> $t
+	echo " *  Author: Jeremy Cartwright" >> $t
+	echo " * Contact: jeremy@tcjc8.com" >> $t
+	echo " * Created:" `date`  >> $t
+	echo " * $app: " >> $t
+	echo " */" >> $t
+	edit
+elif [ $lang == "-go" ]; then
+	t=$home$godir"app/"$app$go
+	mkdir $home$godir $home$godir"app" $home$godir"dev" $home$godir"app/css" $home$godir"app/js" $home$godir"app/pics"
+	y=$home$godir"app.yaml"
+	touch $y
+	echo "application: $app" > $y
+	echo "version: 1" >> $y
+	echo "runtime: go" >> $y
+	echo "api_version: go1" >> $y
+	echo >> $y
+	echo "handlers:" >> $y
+	echo "- url: /app/js" >> $y
+	echo "  static_dir: app/js" >> $y
+	echo >> $y
+	echo "- url: /app/css" >> $y
+	echo "  static_dir app/css" >> $y
+	echo >> $y
+	echo "- url: /app/pics" >> $y
+	echo "  static_dir: app/pics" >> $y
+	echo >> $y
+	echo "- url: /.*" >> $y
+	echo "  script: _go_app" >> $y
+	touch $t
+	echo "$copyright" > $t
+	echo "//  Author: Jeremy Cartwright" >> $t
+	echo "// Contact: jeremy@tcjc8.com" >> $t
+	echo "// Created:" `date`  >> $t
+	echo "//" >> $t
+	echo "/* $app is " >> $t
+	echo " */" >> $t
+	echo "// Package Name" >> $t
+	echo >> $t
+	echo >> $t
+	echo >> $t
+	echo "// Import" >> $t
+	echo >> $t
+	echo >> $t
+	echo >> $t
+	echo "// Functions" >> $t
+	edit
+elif [ $lang == "-py" ]; then
+	t=$home$nest$app$py
+	echo "#!/usr/bin/env python" > $t
+	echo "\"\"\"" >> $t
+	echo "$copyright" >> $t
+	echo "//  Author: Jeremy Cartwright" >> $t
+	echo "// Contact: jeremy@tcjc8.com" >> $t
+	echo "// Created: `date`" >> $t
+	echo "// $app: " >> $t
+	echo "\"\"\"" >> $t
+	echo 
+	mkexe $t
+	edit
+else
+	echo
+	echo "header accepts 1 or 2 flags."
+	echo
+	echo "One flag will create a bash script named \$1 and launch vim."
+	echo "Make a trailing -c flag to create a .c file named \$1.c and launch vim."
+	echo "Make a trailing -go flag to create a .go file named \$1.go and the"
+	echo "accompanying directory structure with app.yaml and launch vim."
+	echo "Make a trailing -py flag to create a .py file named \$1.py and launch vim."
+	echo
+fi

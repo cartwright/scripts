@@ -1,0 +1,152 @@
+#!/bin/bash
+#
+#  Author: Jeremy Cartwright
+# Contact: jeremy@tcjc8.com
+# Created: Wed Nov 14 18:28:17 CST 2012
+# vimmuh: a condensed help file for vim; copied shamelessly
+#         from http://www.worldtimzone.com/res/vi.html.
+
+# categories to include:
+# cursor movement
+# insert mode
+# editing
+# marking text
+# visual commands
+# cut & paste
+# exiting
+# search & replace
+# multiple files
+
+case $1 in
+	cursor) 
+		echo
+		echo "h - move left"
+		echo "j - move down"
+		echo "k - move up"
+		echo "l - move right"
+		echo "w - jump by start of words (punctuation considered words)"
+		echo "W - jump by words (spaces separate words)"
+		echo "e - jump to end of words (punctuation considered words)"
+		echo "E - jump to end of words (no punctuation)"
+		echo "b - jump backward by words (punctuation considered words)"
+		echo "B - jump backward by words (no punctuation)"
+		echo "0 - (zero) start of line"
+		echo "^ - first non-blank character of line"
+		echo "$ - end of line"
+		echo "G - Go To command (prefix with number - 5G goes to line 5)"
+		echo "Note: Prefix a cursor movement command with a number to repeat it. For example, 4j moves down 4 lines."
+		echo
+		;;
+	insert)
+		echo
+		echo "i - start insert mode at cursor"
+		echo "I - insert at the beginning of the line"
+		echo "a - append after the cursor"
+		echo "A - append at the end of the line"
+		echo "o - open (append) blank line below current line (no need to press return)"
+		echo "O - open blank line above current line"
+		echo "ea - append at end of word"
+		echo "Esc - exit insert mode"
+		echo
+		;;
+	editing)
+		echo
+		echo "r - replace a single character (does not use insert mode)"
+		echo "J - join line below to the current one"
+		echo "cc - change (replace) an entire line"
+		echo "cw - change (replace) to the end of word"
+		echo "c$ - change (replace) to the end of line"
+		echo "s - delete character at cursor and subsitute text"
+		echo "S - delete line at cursor and substitute text (same as cc)"
+		echo "xp - transpose two letters (delete and paste, technically)"
+		echo "u - undo"
+		echo ". - repeat last command"
+		echo
+		;;
+	marking)
+		echo
+		echo "v - start visual mode, mark lines, then do command (such as y-yank)"
+		echo "V - start Linewise visual mode"
+		echo "o - move to other end of marked area"
+		echo "Ctrl+v - start visual block mode"
+		echo "O - move to Other corner of block"
+		echo "aw - mark a word"
+		echo "ab - a () block (with braces)"
+		echo "aB - a {} block (with brackets)"
+		echo "ib - inner () block"
+		echo "iB - inner {} block"
+		echo "Esc - exit visual mode"
+		echo
+		;;
+	visual)
+		echo
+		echo "> - shift right"
+		echo "< - shift left"
+		echo "y - yank (copy) marked text"
+		echo "d - delete marked text"
+		echo "~ - switch case"
+		echo
+		;;
+	cut)
+		echo
+		echo "yy - yank (copy) a line"
+		echo "2yy - yank 2 lines"
+		echo "yw - yank word"
+		echo "y$ - yank to end of line"
+		echo "p - put (paste) the clipboard after cursor"
+		echo "P - put (paste) before cursor"
+		echo "dd - delete (cut) a line"
+		echo "dw - delete (cut) the current word"
+		echo "x - delete (cut) current character"
+		echo
+		;;
+	exiting)
+		echo
+		echo ":w - write (save) the file, but don't exit"
+		echo ":wq - write (save) and quit"
+		echo ":q - quit (fails if anything has changed)"
+		echo ":q! - quit and throw away changes"
+		echo
+		;;
+	search)
+		echo
+		echo "/pattern - search for pattern"
+		echo "?pattern - search backward for pattern"
+		echo "n - repeat search in same direction"
+		echo "N - repeat search in opposite direction"
+		echo ":%s/old/new/g - replace all old with new throughout file"
+		echo ":%s/old/new/gc - replace all old with new throughout file with confirmations"
+		echo
+		;;
+	multiple)
+		echo
+		echo ":e filename - Edit a file in a new buffer"
+		echo ":bnext (or :bn) - go to next buffer"
+		echo ":bprev (of :bp) - go to previous buffer"
+		echo ":bd - delete a buffer (close a file)"
+		echo ":sp filename - Open a file in a new buffer and split window"
+		echo "ctrl+ws - Split windows"
+		echo "ctrl+ww - switch between windows"
+		echo "ctrl+wq - Quit a window; also :q"
+		echo "ctrl+wv - Split windows vertically; also :vsplit"
+		echo
+		;;
+	*)
+		echo
+		echo "vimmuh accepts one of nine parameters:"
+		echo
+		echo "cursor: commands to control cursor movement"
+		echo "insert: commands on inserting and appending text"
+		echo "editing: advanced techniques on replacing and deleting text"
+		echo "marking: working with large chunks of text"
+		echo "visual: indent, outdent, copy, delete & switch case of text"
+		echo "cut: commands on copying, deleting and pasting text"
+		echo "exiting: write, write & save, quit, quit & discard changes"
+		echo "search: find, find & replace text"
+		echo "multiple: commands on working with multiple files"
+		echo
+		echo -n "Your choice is: "
+		read choice
+		vimmuh $choice
+		;;
+esac

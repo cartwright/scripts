@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Author: Jeremy Cartwright
+# Created: Sat Dec  3 03:07:11 CST 2011
+# exe: make scipt executable
+
+SCRIPT=$1
+
+chmod 744 $SCRIPT
+echo "$SCRIPT is now green."

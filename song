@@ -1,0 +1,118 @@
+#!/bin/bash 
+#
+# Author: Jeremy Cartwright
+# Contact: thebusker@hotmail.com
+# Created:  Wed Apr 11 12:27:56 CDT 2012
+# song: show what cmus is playing.
+
+# variables ############################
+#
+pfx="/home/$USER/.cmus/playlist/"
+op=`cmus-remote -Q | grep file | sed 's/file //'`
+sfx=".pls"
+f=$pfx$1$sfx
+
+# functions ############################
+#
+# dj: disc jockey knows what we're listening to.
+dj ()
+{
+	if [ $# ]; then
+		case "$1" in
+			$f)
+				cat $1
+				;;
+			$1)
+				echo $op
+				;;
+		esac
+	else echo $op
+	fi
+}
+
+# add: adds a song to a playlist
+add ()
+{
+	if [ -f $1 ]; then
+		dj >> $1
+	else
+		touch $1
+		dj >> $1
+	fi
+}
+
+# usage: print a help file
+usage ()
+{
+	printf "
+	song [playlist] [-flags] : show what cmus is playing.\n
+	USAGE: song accepts no more than two parameters.
+	song will accept no parameters. this prints the song.
+	one parameter will add song to parameter.pls.
+	if '-p' is passed as second parameter, will print the playlist.
+	if '-r' is passed as second parameter, will remove the playlist.
+	if '-a' is passed as second parameter, will show all playlists.\n\n"
+}
+# main wrapper ##########################
+#
+# if more than two parameters passed, show usage.
+if [ $3 ]; then
+	usage
+# accept a flag. known flags: -c cat -r remove -a all. else show usage.
+elif [ $2 ]; then
+	case "$2" in
+		-p)
+			if [ -f $f ]; then
+				dj $f
+			else
+				printf "There is no playlist '$1'. Would you like to start one? (Y/n): "
+				read r
+				if [ $r = "Y" ]; then
+					add $f
+					dj $f
+				fi
+			fi
+			;;
+		-r)
+			if [ -f $f ]; then
+				printf "Are you sure you want to delete $f? (Y/n): "
+				read r
+				if [ $r = "Y" ]; then
+					rm $f
+					printf "$1 has been removed.\n"
+				else
+					printf "kaayy.\n"
+				fi
+			else
+				printf "Whoopsie. There is no file $f. Fixed the glitch...\n"
+			fi
+			;;
+		-a)
+			ls -la $pfx | awk '{ print $9 }'
+			;;
+		*)
+			usage
+			;;
+	esac
+# if just one parameter, add song to playlist.
+elif [ $1 ]; then
+	case "$1" in
+		-a)
+			ls -la $pfx | awk '{ print $9 }'
+			;;
+		*)
+			if [ -f $f ]; then
+				add $f
+				dj $f
+			else
+				printf "There is no playlist '$1'. Would you like to start one? (Y/n): "
+				read r
+				if [ $r = "Y" ]; then
+					add $f
+					dj $f
+				fi
+			fi
+	esac
+# or else just print the song that's playing.
+else dj $1
+fi

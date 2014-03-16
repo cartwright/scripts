@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Author: Jeremy Cartwright
+# Created: Thu Dec  1 09:08:09 CST 2011
+# shoot: kill -9 NNNN? not with shoot. kill with process name.
+
+p=`pgrep $1`
+
+kill -9 $p
+if [ $? -eq 0 ]; then
+	echo "bang bang die." $1 "is dead."
+fi
+echo

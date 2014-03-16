@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+#  Author: Jeremy Cartwright
+# Contact: jeremy@tcjc8.com
+# Created: Thu Sep 12 08:14:38 CDT 2013
+# work: sudo netctl start wrls.sigmakappa
+
+i="wlan0"
+
+	sudo ip link set $i up
+	#sudo wpa_supplicant -B -i $i -c /etc/wpa_supplicant.sigkap.conf
+	sudo wpa_supplicant -B -i $i -c /etc/wpa_supplicant.sigkap2.conf
+	sudo dhcpcd $i
+	kon
+
+	tmux

@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# Author: Jeremy Cartwright
+# Created: Wed Feb  8 08:27:45 CST 2012
+# commandments: prints the 10 Commandments
+
+echo
+echo "You shall have no other gods."
+echo "You shall not take the name of your God in vain."
+echo "You shall sanctify the holy day."
+echo "You shall honor your father and your mother that it might be well with you and you might live long upon the earth."
+echo "You shall not kill."
+echo "You shall not commit adultery."
+echo "You shall not steal."
+echo "You shall not bare false witness against your neighbor."
+echo "You shall not covet your neighbor's house."
+echo "You shall not covet your neighbor's wife or his manservant or his maidservant or his cattle or anything that is his."
+echo

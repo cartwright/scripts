@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# Author: Jeremy Cartwright
+# Created:  Wed Apr 4 02:59:39 CDT 2012
+# workers: a script to find those working on stopped jobs during attempted logout.
+
+w=`ps aux | awk '{ print $8 "::" $11 "::" $2 }' | grep ^T`
+o="Erry one of 'em. Shiftless."
+
+echo
+
+if [ "$w" != "" ] ; then
+	ps aux | awk '{print $8 "::" $11 "::" $2 }' | grep ^T
+	o="...shiftless."
+fi
+
+echo $o

@@ -1,0 +1,8 @@
+#!/bin/bash 
+#
+#  Author: Jeremy Cartwright
+# Contact: jeremy@tcjc8.com
+# Created: Wed Jul 24 12:48:24 CDT 2013
+# weather: script to get the weather
+
+wget -q -O - http://www.accuweather.com/us/il/rockford/61104/city-weather-forecast.asp?unit=c | grep -o '<div class="info"> <span class="cond">[A-Z].*</span> <strong' | sed -e 's/.*<span class="cond".//' | sed -e 's/<\/span>.*//'

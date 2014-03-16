@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Author: Jeremy Cartwright
+# Contact: thebusker@hotmail.com
+# Created:  Thu Apr 5 20:41:25 CDT 2012
+# jeremy: last five programs launched, last 10 songs listened to, and last 50 key strokes.
+
+echo
+ps aux | grep ^jeremy --color=auto
+echo
+cat ~/.bash_history | head -n 5
+echo
+cat ~/.cmus/command-history

@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# Author: Jeremy Cartwright
+# Contact: thebusker@hotmail.com
+# Created:  Wed Apr 4 16:47:57 CDT 2012
+# wrls: a tool to bring up and down wlan0.
+
+s=$1
+i="wlan0"
+
+if [ "$s" == "up" ]; then
+	sudo ip link set $i up
+	sudo wpa_supplicant -B -i $i -c /etc/wpa_supplicant.conf
+	sudo dhcpcd $i
+elif [ "$s" == "down" ]; then
+	w=`pgrep wpa_supplicant`
+	d=`pgrep dhcpcd`
+	sudo kill -9 $w $d
+	sudo ip link set $i down
+else
+	echo "wrls usage: wrls up - brings wlan0 up
+            wrls down - brings wlan0 down"
+	echo
+	echo "tools used are ip wpa_supplicant dhcpcd."
+	echo "Depends on sudo. http://www.archlinux.org/"
+	echo "kill -9 on down call. ip link set down."
+	echo
+fi

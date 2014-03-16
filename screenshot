@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+#  Author: Jeremy Cartwright
+# Contact: jeremy@tcjc8.com
+# Created: Sun Mar 9 17:46:30 CDT 2014
+# screenshot: takes screeshot.
+
+if [ $1 ]; then
+	j=$1
+else
+	j=`date +%s`
+fi
+
+file="$HOME/almanac/$j.png"
+
+	xwd -root | xwdtopnm | pnmtopng > $file
+	echo $file written.

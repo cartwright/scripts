@@ -1,0 +1,80 @@
+#!/bin/bash
+#
+#  Author: Jeremy Cartwright
+# Contact: jeremy@tcjc8.com
+# Created: Sat Jun 22 08:37:10 CDT 2013
+# old_swimmies_get: a one off to bulk download some pictures for Tracy
+
+pre="http://s.imwx.com/common/articles/images/"
+post="_1900_BeachTWC_650x366.jpg"
+mid=0000
+
+wget http://s.imwx.com/common/articles/images/02_FixedBeachOld_650x366.jpg
+wget http://s.imwx.com/common/articles/images/01_FixedBeachOld_650x366.jpg
+
+while [ "$mid" -le 0400 ]; do
+	swmy=$pre$(printf "%04d" "$mid")$post
+	#echo $swmy
+	wget $swmy
+	((mid+=1))
+done
+
+post="_1920_BeachTWC_650x366.jpg"
+mid=0000
+
+while [ "$mid" -le 0400 ]; do
+	swmy=$pre$(printf "%04d" "$mid")$post
+        #echo $swmy
+        wget $swmy
+        ((mid+=1))
+done
+
+post="_1930_BeachTWC_650x366.jpg"
+mid=0000
+
+while [ "$mid" -le 0400 ]; do
+	swmy=$pre$(printf "%04d" "$mid")$post
+        #echo $swmy
+        wget $swmy
+        ((mid+=1))
+done
+
+post="_1940_BeachTWC_650x366.jpg"
+mid=0000
+
+while [ "$mid" -le 0400 ]; do
+	swmy=$pre$(printf "%04d" "$mid")$post
+        #echo $swmy
+        wget $swmy
+        ((mid+=1))
+done
+
+post="_1950_BeachTWC_650x366.jpg"
+mid=0000
+
+while [ "$mid" -le 0400 ]; do
+	swmy=$pre$(printf "%04d" "$mid")$post
+        #echo $swmy
+        wget $swmy
+        ((mid+=1))
+done
+
+post="_1960_BeachTWC_650x366.jpg"
+mid=0000
+
+while [ "$mid" -le 0400 ]; do
+	swmy=$pre$(printf "%04d" "$mid")$post
+        #echo $swmy
+        wget $swmy
+        ((mid+=1))
+done
+
+post="_1970_BeachTWC_650x366.jpg"
+mid=0000
+
+while [ "$mid" -le 0400 ]; do
+	swmy=$pre$(printf "%04d" "$mid")$post
+        #echo $swmy
+        wget $swmy
+        ((mid+=1))
+done
