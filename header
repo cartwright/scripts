@@ -19,7 +19,7 @@ ubin="ubin/"
 nest="nest/"
 scripts="scripts/"
 godir="go/$app/"
-copyright='/* Copyright (c) 2012-2014 Jeremy Cartwright. All rights reserved.
+copyrightC='/* Copyright (c) 2012-2014 Jeremy Cartwright. All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions
@@ -46,6 +46,7 @@ copyright='/* Copyright (c) 2012-2014 Jeremy Cartwright. All rights reserved.
    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */'
+copyright=`cat $HOME/scripts/bsd3clause_license`
 
 edit() {
 	cat $t
@@ -66,6 +67,8 @@ if [ $# -eq 1 ]; then
 	touch $t
 	echo "#!/bin/bash" > $t
 	echo "#" >> $t
+	echo "$copyright" >> $t
+	echo "#" >> $t
 	echo "#  Author: Jeremy Cartwright" >> $t
 	echo "# Contact: jeremy@tcjc8.com" >> $t
 	echo "# Created:" `date` >> $t
@@ -75,7 +78,7 @@ if [ $# -eq 1 ]; then
 elif [ $lang == "-c" ]; then
 	t=$home$ubin$app$c
 	touch $t
-	echo "$copyright" > $t
+	echo "$copyrightC" > $t
 	echo "/* Includes & Defines*/" >> $t
 	echo >> $t
 	echo >> $t
@@ -110,7 +113,7 @@ elif [ $lang == "-go" ]; then
 	echo "- url: /.*" >> $y
 	echo "  script: _go_app" >> $y
 	touch $t
-	echo "$copyright" > $t
+	echo "$copyrightC" > $t
 	echo "//  Author: Jeremy Cartwright" >> $t
 	echo "// Contact: jeremy@tcjc8.com" >> $t
 	echo "// Created:" `date`  >> $t
@@ -130,13 +133,13 @@ elif [ $lang == "-go" ]; then
 elif [ $lang == "-py" ]; then
 	t=$home$nest$app$py
 	echo "#!/usr/bin/env python" > $t
-	echo "\"\"\"" >> $t
+	echo "#" >> $t
 	echo "$copyright" >> $t
-	echo "//  Author: Jeremy Cartwright" >> $t
-	echo "// Contact: jeremy@tcjc8.com" >> $t
-	echo "// Created: `date`" >> $t
-	echo "// $app: " >> $t
-	echo "\"\"\"" >> $t
+	echo "#" >> $t
+	echo "#   Author: Jeremy Cartwright" >> $t
+	echo "#  Contact: jeremy@tcjc8.com" >> $t
+	echo "#  Created: `date`" >> $t
+	echo "#  $app: " >> $t
 	echo 
 	mkexe $t
 	edit
