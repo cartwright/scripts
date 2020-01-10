@@ -5,4 +5,4 @@
 # Created: Wed Jul 24 12:06:51 CDT 2013
 # paclogChecker: 'e dodges bullets, Avi.
 
-sed '1,/:: Starting/d' /var/log/paclog | wc -l
+sed '1,/:: Starting/d' /var/log/pacman.log | wc -l
