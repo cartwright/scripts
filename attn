@@ -37,7 +37,7 @@ scriptVersion="3.0.0"
 
 # This sets the information to be displayed. Available: distro, Kernel, DE, WM, Win_theme, Theme, Icons, Font, Background, ASCII. To get just the information, and not a text-art logo, you would take "ASCII" out of the below variable.
 #display="host distro kernel uptime shell res de wm wmtheme gtk icons font background gpu"
-display=( host distro kernel uptime pkgs shell res de wm wmtheme gtk cpu mem )
+display=( host distro kernel uptime pkgs shell res de wm gtk cpu mem )
 # Display Type: ASCII or Text
 display_type="ASCII"
 
@@ -47,7 +47,7 @@ display_type="ASCII"
 
 # WM & DE process names
 # Removed WM's: compiz
-wmnames="fluxbox openbox blackbox xfwm4 metacity kwin icewm pekwm fvwm dwm awesome wmaker stumpwm musca i3 xmonad ratpoison scrotwm spectrwm wmfs wmii beryl subtle e16 enlightenment sawfish emerald monsterwm dminiwm compiz Finder herbstluftwm"
+wmnames="fluxbox openbox blackbox xfwm4 metacity kwin icewm pekwm fvwm dwm awesome wmaker stumpwm musca i3 xmonad ratpoison scrotwm spectrwm wmfs wmii beryl subtle e16 enlightenment sawfish emerald monsterwm dminiwm compiz Finder herbstluftwm sddm"
 denames="gnome-session xfce-mcs-manage xfce4-session xfconfd ksmserver lxsession gnome-settings-daemon mate-session mate-settings-daemon Finder"
 
 # Export theme settings
@@ -991,7 +991,7 @@ detectde () {
 				{
 					if ($1 ~ /^_DT_SAVE_MODE/) {
 						de = $NF
-						gsub(/\"/,"",de)
+						gsub(/"/,"",de)
 						de = toupper(de)
 						exit
 					}
@@ -1139,6 +1139,7 @@ detectwm () {
 				if [ "$PID" ]; then
 					case $each in
 						'awesome') WM="Awesome";;
+						'sddm') WM="SDDM";;
 						'beryl') WM="Beryl";;
 						'blackbox') WM="Blackbox";;
 						'cinnamon') WM="Cinnamon";;
