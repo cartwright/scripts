@@ -1,8 +1,0 @@
-#!/bin/bash
-#
-#  Author: Jeremy Cartwright
-# Contact: jeremy@tcjc8.com
-# Created: Wed Jul 24 11:48:42 CDT 2013
-# upgrades: a crontab script for conky output
-
-pacman -Syu -q -p --print-format %n --noprogressbar > /var/log/paclog 

@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# Author: Jeremy Cartwright
+# Created: 18-JAN-2020
+# Edited: intitial edit
+# header: begins a new blog post for pelican
+#
+
+base="/var/www/blog/html/content/"
+p=$(date +%s).md
+t=$base$p
+
+if [ $# -eq 0 ]; then
+	touch $t
+	echo "Title: " > $t
+	echo "Date: " `date` >> $t
+	echo "Tags: " >> $t
+	echo >> $t
+	vim $t
+else
+	echo
+	echo "blog accepts no flags."
+	echo
+	echo "blog will create a .md file named $t and launch vim."
+	echo "This limited script is environment specific."
+	echo
+fi
