@@ -21,7 +21,7 @@ else
 	echo
 	echo "blog accepts no flags."
 	echo
-	echo "blog will create a .md file named $t and launch vim."
+	echo "blog will create a .md file named \$t and launch vim."
 	echo "This limited script is environment specific."
 	echo
 fi
