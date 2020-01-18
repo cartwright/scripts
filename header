@@ -2,12 +2,10 @@
 #
 # Author: Jeremy Cartwright
 # Created: 28-Mar-2012
-# Edited: 19-Dec-19
+# Edited: 18-JAN-20
 # header: prints a header for a new bash file,
-# 	  or a .c file if passed the -c flag,
-#         or a .go file (with dir structure and app.yaml)
-#         if passed the -go flag,
 #	  or a .py file if passed the -py flag.
+#
 
 app=$1
 lang=$2
@@ -15,18 +13,18 @@ home="/home/$USER/"
 py=".py"
 nest="nest/"
 scripts="scripts/"
-copyright=`cat $HOME/scripts/bsd3clause_license`
 
 edit() {
 	cat $t
 	echo -n "Would you like to edit $app? (Y/n): "
 	read m
 
-	if [ $m == "Y" ]; then
+	if [ $m == "{Y|y}" ]; then
 	   vim $t
 	   exit 0
 	else
 	   echo "suits. Catch you on the flipside."
+	   echo
 	   exit 1
 	fi
 }
@@ -36,7 +34,8 @@ if [ $# -eq 1 ]; then
 	touch $t
 	echo "#!/bin/bash" > $t
 	echo "#" >> $t
-	echo "$copyright" >> $t
+	echo "# Copyright: BSD 3 Clause License" >> $t
+	echo "# https://github.com/cartwright/scripts/blob/master/LICENSE" >> $t
 	echo "#" >> $t
 	echo "#  Author: Jeremy Cartwright" >> $t
 	echo "# Contact: thebusker@hotmail.com" >> $t
@@ -48,7 +47,8 @@ elif [ "$lang" == "-py" ]; then
 	t=$home$nest$app$py
 	echo "#!/usr/bin/env python" > $t
 	echo "#" >> $t
-	echo "$copyright" >> $t
+	echo "# Copyright: BSD 3 Clause License" >> $t
+	echo "# https://github.com/cartwright/scripts/blob/master/LICENSE" >> $t
 	echo "#" >> $t
 	echo "#   Author: Jeremy Cartwright" >> $t
 	echo "#  Contact: thebusker@hotmail.com" >> $t
