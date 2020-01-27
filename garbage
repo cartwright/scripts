@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Copyright: BSD 3 Clause License
+# https://github.com/cartwright/scripts/blob/master/LICENSE
+#
+#  Author: Jeremy Cartwright
+# Contact: thebusker@hotmail.com
+# Created: Sun 19 Jan 2020 07:00:02 AM CST
+# garbage: a script to prune journalctl
+
+sudo journalctl --vacuum-size=50M && sudo journalctl --vacuum-time=2weeks
