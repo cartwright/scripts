@@ -19,7 +19,7 @@ edit() {
 	echo -n "Would you like to edit $app? (Y/n): "
 	read m
 
-	if [ $m == "{Y|y}" ]; then
+	if [[ $m == "Y" || "y" ]]; then
 	   vim $t
 	   exit 0
 	else
